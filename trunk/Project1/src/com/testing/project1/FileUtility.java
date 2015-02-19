@@ -30,7 +30,28 @@ public class FileUtility {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return lines;
+		return newOptimizedArray(lines);
+	}
+	
+	private static String[] newOptimizedArray(String[] lines){
+		int count = lines.length;
+		int counter = 0;
+		int actualSize = 0;
+		while (count > 0){
+			if(lines[counter] != null){
+				actualSize++;
+			}else{
+				break;
+			}
+			counter++;
+			count--;
+		}
+		String[] newCopy = new String[actualSize];
+		for(int i = 0; i < actualSize ; i++){
+			newCopy[i] = lines[i];
+		}
+		lines = null;
+		return newCopy;
 	}
 	
 	private static String getDelimiterForLines(){
