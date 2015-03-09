@@ -1,0 +1,2 @@
+serviceClass: com.cosc.com.client.GreetingService
+path: 5F9518DF398B05D612E3C632FFD853A9.gwt.rpc

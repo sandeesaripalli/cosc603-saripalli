@@ -1,0 +1,3 @@
+# Module shutter_web_ap
+# RPC service class, partial path of RPC policy file
+com.cosc.com.client.GreetingService, 5F9518DF398B05D612E3C632FFD853A9.gwt.rpc
