@@ -4,7 +4,7 @@ package edu.towson.cis.cosc603.project3.monopoly;
 /**
  * The Class Cell.
  */
-public abstract class Cell {
+public abstract class Cell implements IOwnable {
 	
 	/** The name. */
 	private String name;
@@ -33,18 +33,18 @@ public abstract class Cell {
 		return theOwner;
 	}
 	
-	/**
-	 * Gets the price.
-	 *
-	 * @return the price
+	/* (non-Javadoc)
+	 * @see edu.towson.cis.cosc603.project3.monopoly.IOwnable#getPrice()
 	 */
+	@Override
 	public int getPrice() {
 		return 0;
 	}
 
-	/**
-	 * Play action.
+	/* (non-Javadoc)
+	 * @see edu.towson.cis.cosc603.project3.monopoly.IOwnable#playAction()
 	 */
+	@Override
 	public abstract void playAction();
 
 	/**
@@ -68,7 +68,11 @@ public abstract class Cell {
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
-    public String toString() {
+    /* (non-Javadoc)
+	 * @see edu.towson.cis.cosc603.project3.monopoly.IOwnable#toString()
+	 */
+    @Override
+	public String toString() {
         return name;
     }
 
