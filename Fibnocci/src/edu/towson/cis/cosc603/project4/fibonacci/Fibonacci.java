@@ -16,7 +16,7 @@ public class Fibonacci {
 	public int fibonacci(int n) {
 		switch (n) {
 		case 0:
-			return 0;
+			return 0;/** Bug was here it was 1 earlier chasnged it to 0 */
 		case 1:
 			return 1;
 		default:
