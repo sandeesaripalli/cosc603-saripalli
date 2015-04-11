@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>VendingMachineItemTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">vending-machine-project5 (Apr 10, 2015 11:04:06 PM)</a> &gt; <a href="../../index.html" class="el_group">vending-machine-project5</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">edu.towson.cis.cosc603.project4.vendingmachine</a> &gt; <span class="el_source">VendingMachineItemTest.java</span></div><h1>VendingMachineItemTest.java</h1><pre class="source lang-java linenums">/**
+ *
+ */
+package edu.towson.cis.cosc603.project4.vendingmachine;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author ssarip1
+ *
+ */
+<span class="fc" id="L18">public class VendingMachineItemTest {</span>
+
+    VendingMachineItem product_item;
+    VendingMachineException machineException;
+
+    /**
+     * Initiliaze two objects as per the requirement of the test cases.
+     *
+     * @throws Exception
+     *             the exception
+     */
+    @Before
+    public void setUp() throws Exception {
+<span class="fc" id="L31">	product_item = new VendingMachineItem(&quot;Dew&quot;, 1.75);</span>
+<span class="fc" id="L32">	machineException = new VendingMachineException();</span>
+<span class="fc" id="L33">    }</span>
+
+    @Test
+    /**
+     * Test custom constructor 
+     */
+    public void testConstructor() {
+<span class="fc" id="L40">	assertNotNull(product_item);</span>
+<span class="fc" id="L41">    }</span>
+
+    @Test(expected = VendingMachineException.class)
+    public void testConstructorNegativeValues() {
+<span class="nc" id="L45">	assertSame(machineException, new VendingMachineItem(&quot;Water&quot;, -0.0));</span>
+<span class="nc" id="L46">    }</span>
+
+    @Test
+    /**
+     * Test for the getName method 
+     * Test to see if the item returns the correct name
+     */
+    public void testGetName() {
+<span class="fc" id="L54">	assertEquals(&quot;Dew&quot;, product_item.getName());</span>
+<span class="fc" id="L55">    }</span>
+
+    @Test
+    /**
+     *Test for the getPrice method 
+     *Test to see if the price of the item is correct as initiliazed 
+     */
+    public void testPrice() {
+<span class="fc" id="L63">	assertEquals(1.75, product_item.getPrice(), 0.001);</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * @throws java.lang.Exception
+     * Assign objects to null
+     */
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L72">	product_item = null;</span>
+<span class="fc" id="L73">	machineException = null;</span>
+<span class="fc" id="L74">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>vending-machine-project5 (Apr 10, 2015 11:04:06 PM)</div></body></html>
