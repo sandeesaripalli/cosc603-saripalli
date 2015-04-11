@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>VendingMachineTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">vending-machine-project5 (Apr 10, 2015 11:04:06 PM)</a> &gt; <a href="../../index.html" class="el_group">vending-machine-project5</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">edu.towson.cis.cosc603.project4.vendingmachine</a> &gt; <span class="el_source">VendingMachineTest.java</span></div><h1>VendingMachineTest.java</h1><pre class="source lang-java linenums">/**
+ *
+ */
+package edu.towson.cis.cosc603.project4.vendingmachine;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author ssarip1
+ *
+ */
+<span class="fc" id="L19">public class VendingMachineTest {</span>
+
+    VendingMachine vendingMachine;
+    VendingMachineItem vendingMachineItem;
+    VendingMachineException vendingMachineException;
+
+    /**
+     * @throws java.lang.Exception
+     *             Instantiating two new objects vendingMachine and vending MachineItem. Adding one unique  &lt;br&gt;
+     *             item to the vendingMachine object, duplicating it will throw an exception which is tested later &lt;br&gt;
+     *              
+     */
+    @Before
+    public void setUp() throws Exception {
+<span class="fc" id="L33">	vendingMachine = new VendingMachine();</span>
+<span class="fc" id="L34">	vendingMachineItem = new VendingMachineItem(&quot;Dew&quot;, 1.70);</span>
+<span class="fc" id="L35">	vendingMachineException = new VendingMachineException();</span>
+<span class="fc" id="L36">	vendingMachine.addItem(vendingMachineItem, VendingMachine.D_CODE);</span>
+<span class="fc" id="L37">    }</span>
+
+    /**
+     * @throws java.lang.Exception
+     * assigning all objects to null
+     */
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L45">	vendingMachine = null;</span>
+<span class="fc" id="L46">	vendingMachineItem = null;</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Test method for
+     * let's add an item and check if the vending machine accepts or not.&lt;br&gt;
+     * After adding we will again try to add another item, and check for the
+     * expected exception in the next method
+     *
+     */
+    @Test
+    public void testAddItem() {
+<span class="fc" id="L58">	vendingMachine.addItem(vendingMachineItem, VendingMachine.B_CODE);</span>
+<span class="fc" id="L59">    }</span>
+    /**
+     * Test method for exception
+     * Let's try another add item method see if it throws the exception&lt;br /&gt;
+     *  to check if we added a unique item or not
+     * 
+     *
+     */
+    @Test(expected = VendingMachineException.class)
+    public void testAddItemForException() {
+<span class="nc" id="L69">    vendingMachine.addItem(vendingMachineItem, VendingMachine.A_CODE);</span>
+<span class="nc" id="L70">	vendingMachine.addItem(vendingMachineItem, VendingMachine.B_CODE);</span>
+<span class="nc" id="L71">	vendingMachine.addItem(vendingMachineItem, VendingMachine.C_CODE);</span>
+<span class="nc" id="L72">	vendingMachine.addItem(vendingMachineItem, VendingMachine.D_CODE);</span>
+<span class="nc" id="L73">    }</span>
+    
+    @Test(expected = VendingMachineException.class)
+    public void testAddItemUnknown(){
+<span class="nc" id="L77">    vendingMachine.addItem(vendingMachineItem, &quot;Unknown&quot;);</span>
+<span class="nc" id="L78">    }</span>
+
+    /**
+     * Remove method test method. Test if the item object is removed if yes it is going to return a null value
+     * when we try to retrieve the same item again
+     * 
+     */
+    @Test
+    public void testRemoveItem() {
+<span class="fc" id="L87">	vendingMachine.removeItem(VendingMachine.D_CODE);</span>
+<span class="fc" id="L88">	assertNull(vendingMachine.getItem(VendingMachine.D_CODE));</span>
+<span class="fc" id="L89">    }</span>
+    
+    @Test(expected = VendingMachineException.class)
+    public void testRemoveItemExceptionCheck(){
+<span class="nc" id="L93">    	vendingMachine.removeItem(VendingMachine.D_CODE);</span>
+<span class="nc" id="L94">    	vendingMachine.removeItem(VendingMachine.D_CODE);</span>
+<span class="nc" id="L95">    }</span>
+    
+    //Testing for Unknown
+    @Test(expected = VendingMachineException.class)
+    public void testRemoveUnknownItem(){
+<span class="nc" id="L100">    	vendingMachine.removeItem(&quot;Unknown&quot;);</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Test method for
+     * {@link edu.towson.cis.cosc603.project4.vendingmachine.VendingMachine#insertMoney(double)}
+     * Inserting some money and checking if the value persists
+     */
+    @Test
+    public void testInsertMoney() {
+<span class="fc" id="L110">	vendingMachine.insertMoney(1.75);</span>
+<span class="fc" id="L111">	assertEquals(1.75, vendingMachine.getBalance(), 0.0);</span>
+<span class="fc" id="L112">    }</span>
+    
+    @Test(expected = VendingMachineException.class)
+    public void testInsertMoneyNegativeValue(){
+<span class="nc" id="L116">    	vendingMachine.insertMoney(-5.0);</span>
+<span class="nc" id="L117">    }</span>
+
+    /**
+     * Test method for
+     * {@link edu.towson.cis.cosc603.project4.vendingmachine.VendingMachine#getBalance()}
+     * this is will return the balance which we have inserted.
+     */
+    @Test
+    public void testGetBalance() {
+<span class="fc" id="L126">	vendingMachine.insertMoney(1.75);</span>
+<span class="fc" id="L127">	assertEquals(1.75, vendingMachine.getBalance(), 0.0);</span>
+<span class="fc" id="L128">    }</span>
+    
+
+    /**
+     * Test method for
+     * {@link edu.towson.cis.cosc603.project4.vendingmachine.VendingMachine#makePurchase(java.lang.String)}
+     * We will try to purchase the item and check if it succeeds
+     */
+    @Test
+    public void testMakePurchase() {
+<span class="fc" id="L138">	vendingMachine.insertMoney(2.0);</span>
+<span class="fc" id="L139">	assertTrue(vendingMachine.makePurchase(VendingMachine.D_CODE));</span>
+<span class="fc" id="L140">    }</span>
+
+    @Test
+    /**
+     * we will check if the vending machine allows to purchase the item again
+     */
+    public void testPurchaseForNull() {
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">	assertTrue(!vendingMachine.makePurchase(VendingMachine.D_CODE));</span>
+<span class="fc" id="L148">    }</span>
+
+    /**
+     * Test method for
+     * {@link edu.towson.cis.cosc603.project4.vendingmachine.VendingMachine#returnChange()}
+     * We will check if the vending machine returns the balance correctly to the user
+     */
+    @Test
+    public void testReturnChange() {
+<span class="fc" id="L157">	vendingMachine.insertMoney(2.0);</span>
+<span class="fc" id="L158">	assertTrue(vendingMachine.makePurchase(VendingMachine.D_CODE));</span>
+<span class="fc" id="L159">	assertEquals(0.25, vendingMachine.returnChange(), 0.5);</span>
+<span class="fc" id="L160">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>vending-machine-project5 (Apr 10, 2015 11:04:06 PM)</div></body></html>
