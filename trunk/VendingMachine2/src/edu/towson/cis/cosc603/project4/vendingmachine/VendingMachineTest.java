@@ -1,6 +1,7 @@
 package edu.towson.cis.cosc603.project4.vendingmachine;
 
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
 /**
@@ -62,11 +63,17 @@ public class VendingMachineTest {
 		VendingMachine fixture = new VendingMachine();
 		fixture.balance = 1.0;
 		VendingMachineItem item = new VendingMachineItem("", 1.0);
+		VendingMachineItem item2 = new VendingMachineItem("", 1.0);
+		VendingMachineItem item3 = new VendingMachineItem("", 1.0);
+		VendingMachineItem item4 = new VendingMachineItem("", 1.0);
 		String code = "A";
 
 		fixture.addItem(item, code);
 
 		// add additional test code here
+		fixture.addItem(item2, VendingMachine.D_CODE);
+		fixture.addItem(item3, VendingMachine.B_CODE);
+		fixture.addItem(item4, VendingMachine.C_CODE);
 	}
 
 	/**
@@ -97,13 +104,14 @@ public class VendingMachineTest {
 	 * @generatedBy CodePro at 4/10/15 10:38 PM
 	 */
 	@Test(expected = edu.towson.cis.cosc603.project4.vendingmachine.VendingMachineException.class)
-	public void testAddItem_3()
-		throws Exception {
+	public void testAddItem_3(){
 		VendingMachine fixture = new VendingMachine();
 		fixture.balance = 1.0;
 		VendingMachineItem item = new VendingMachineItem("", 1.0);
 		String code = "";
-
+		String code1 = "A";
+		fixture.addItem(item, code1);
+		fixture.addItem(item, code1);
 		fixture.addItem(item, code);
 
 		// add additional test code here
@@ -199,7 +207,7 @@ public class VendingMachineTest {
 		throws Exception {
 		VendingMachine fixture = new VendingMachine();
 		fixture.balance = 1.0;
-		double amount = -4.9E-324;
+		double amount = -5.0;
 
 		fixture.insertMoney(amount);
 
@@ -214,8 +222,7 @@ public class VendingMachineTest {
 	 * @generatedBy CodePro at 4/10/15 10:38 PM
 	 */
 	@Test
-	public void testMakePurchase_1()
-		throws Exception {
+	public void testMakePurchase_1() {
 		VendingMachine fixture = new VendingMachine();
 		fixture.balance = Double.MAX_VALUE;
 		String code = "A";
@@ -224,6 +231,10 @@ public class VendingMachineTest {
 
 		// add additional test code here
 		assertEquals(false, result);
+		VendingMachineItem item = new VendingMachineItem("", 1.0);
+
+		fixture.addItem(item, code);
+		assertTrue(fixture.makePurchase(code));
 	}
 
 	/**
@@ -324,6 +335,7 @@ public class VendingMachineTest {
 
 		// add additional test code here
 		assertNotNull(result);
+		fixture.removeItem(code);
 	}
 
 	/**
